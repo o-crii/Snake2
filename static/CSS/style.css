@@ -1,0 +1,27 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.left-img{
+	width: 150px;
+	height: 100px;
+}
+
+.flex
+{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.container{
+	width: 100vw;
+	height: 200px;
+}
+
+#Board{
+	margin-left: 36%;
+	border-radius: 10px;
+}
