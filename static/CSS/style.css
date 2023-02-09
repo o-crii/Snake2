@@ -31,6 +31,7 @@
 	margin-left: 100px;
 	margin-top: 100px;
 	border-radius: 10px;
+	box-shadow: blue 5px 5px 40px;
 }
 
 #Title{
@@ -46,6 +47,7 @@
 	border: 7px solid black;
 	line-height: 120%;
 	text-shadow: -3px 0 #FF0000, 0 3px #FF0000, 3px 0 #FF0000, 0 -3px #FF0000;
+	box-shadow: black 7px 7px 12px;
 }
 
 #Topscore{
@@ -61,6 +63,7 @@
 	padding-bottom: 5px;
 	padding-top: 5px;
 	text-shadow: -2px 0 #000000, 0 2px #000000, 2px 0 #000000, 0 -2px #000000;
+	box-shadow: orange 7px 7px 12px;	
 }
 
 #Color{
@@ -73,7 +76,7 @@
 	margin-right: 25px;
 	display: flex;
 	flex-direction: column;
-	margin-top: 200px; 
+	margin-top: 100px;
 }
 
 #fillImage{
@@ -93,6 +96,17 @@
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+}
+
+.Hi{
+	text-align: center;
+	margin-top: 50px;
+}
+
+#Button{
+	width: 100px;
+	height: 40px;
+	border-radius: 10px;
 }
 
 

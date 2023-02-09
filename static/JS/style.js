@@ -23,6 +23,8 @@ let score = 0
 
 var GameOver = false;
 
+
+
 window.onload = function() {
 	Board = document.getElementById('Board')  //la variabile Board ha un tag canvas//
 
@@ -44,6 +46,29 @@ window.onload = function() {
 	setInterval(update, 1000/10); //ogni 100 millisecondi eseguirà la funzione di aggiornamento
 
 }
+
+function ClickButton(){
+        var button = document.getElementById('Button')
+
+        Board = document.getElementById('Board')  //la variabile Board ha un tag canvas//
+
+		Board.height = rows * blocksize; //impostiamo l'altezza del canvas moltiplicando le righe per la dimensione del singolo blocco//
+
+		Board.width = cols * blocksize; //impostiamo la larghezza del canvas moltiplicando le colonne per la dimensione del singolo blocco//
+
+		context = Board.getContext('2d') //otteniamo il contesto: board prendi contesto 2d (dimensione); tutto questo è usato per disegnare sulla lavagna//
+
+		//funzione di aggiornamento che aggiornerà la lavagna//
+
+		PosizioneMela();
+
+		//facciamo muovere il serpente//
+
+		document.addEventListener("keyup", changeDirection); //changeDirection è il richiamo della funzione//
+
+		//update(); //ripetiamo la funzione update più volte perché sennò non si accocchia mentre il serpente si muove
+		setInterval(update, 1000/10); //ogni 100 millisecondi eseguirà la funzione di aggiornamento
+    }
 
 function updateScore(){
 	score++
@@ -107,6 +132,8 @@ function update() {
 		context.fillRect(SnakeBody[i][0], SnakeBody[i][1], blocksize, blocksize); //queste sono le coordinate x e y che prenderanno la dimensione del singolo blocco grazie a blocksize
 	} //la mela che viene mangiata diventa il corpo del serpente ma non si aggrega ad esso rimane fissa (DA SISTEMARE)
 
+
+
 	//condizioni del GameOver
 	if (SnakeX < 0 || SnakeX > cols * blocksize || SnakeY < 0 || SnakeY > rows * blocksize) { // condizione utilizzata per quando il serpente supera con l'asse x o y i limiti del nostro canvas
 		GameOver = true
@@ -122,6 +149,8 @@ function update() {
 		}
 	}
 }
+
+
 
 function changeDirection(e) {
 
