@@ -6,44 +6,54 @@ var context; //sarà l'oggetto che utilizzeremo per disegnare//
 let lx = 25
 let ly = 25
 
-//disegno la testa del serpente//
+//disegno la testa del serpente
 var SnakeX = blocksize * 7; 
 var SnakeY = blocksize * 7;
-var SnakeVX = 0; //velocità del serpente sull'asse x = 0//
-var SnakeVY = 0; //velocità del serpente sull'asse y = 0//
+var SnakeVX = 0; //velocità del serpente sull'asse x = 0
+var SnakeVY = 0; //velocità del serpente sull'asse y = 0
 //facendo così facciamo spawnare il serpente nel punto 7, 7, del nostro canvas all'inizio del gioco//
 var SnakeBody = []; //il corpo del serpente sarà un array che memorizzerà un mucchio di segmenti che equivalgono ad un segmento x o y
+const SnakeBorder = "black"  //riga 141 CHIEDERE A MASTRANDREA
 
-//disegnamo la mela//
+//disegnamo la mela
 var MelaX;
 var MelaY;
-//settiamo lo spawn della mela//
+//settiamo lo spawn della mela
 
 let score = 0
 
 var GameOver = false;
 
+const goulpSound = new Audio("goulp.mp3")  //CHIEDERE A MASTRANDREA gulpSound.play()//
+
 
 
 window.onload = function() {
-	Board = document.getElementById('Board')  //la variabile Board ha un tag canvas//
 
-	Board.height = rows * blocksize; //impostiamo l'altezza del canvas moltiplicando le righe per la dimensione del singolo blocco//
+        Board = document.getElementById('Board')  //la variabile Board ha un tag canvas//
 
-	Board.width = cols * blocksize; //impostiamo la larghezza del canvas moltiplicando le colonne per la dimensione del singolo blocco//
+		Board.height = rows * blocksize; //impostiamo l'altezza del canvas moltiplicando le righe per la dimensione del singolo blocco//
 
-	context = Board.getContext('2d') //otteniamo il contesto: board prendi contesto 2d (dimensione); tutto questo è usato per disegnare sulla lavagna//
+		Board.width = cols * blocksize; //impostiamo la larghezza del canvas moltiplicando le colonne per la dimensione del singolo blocco//
 
-	//funzione di aggiornamento che aggiornerà la lavagna//
+		context = Board.getContext('2d') //otteniamo il contesto: board prendi contesto 2d (dimensione); tutto questo è usato per disegnare sulla lavagna//
 
-	PosizioneMela();
+		//funzione di aggiornamento che aggiornerà la lavagna//
 
-	//facciamo muovere il serpente//
+		PosizioneMela();
 
-	document.addEventListener("keyup", changeDirection); //changeDirection è il richiamo della funzione//
+		//facciamo muovere il serpente//
 
-	//update(); //ripetiamo la funzione update più volte perché sennò non si accocchia mentre il serpente si muove
-	setInterval(update, 1000/10); //ogni 100 millisecondi eseguirà la funzione di aggiornamento
+		document.addEventListener("keyup", changeDirection); //changeDirection è il richiamo della funzione//
+
+		//update(); //ripetiamo la funzione update più volte perché sennò non si accocchia mentre il serpente si muove
+		setInterval(update, 1000/10); //ogni 100 millisecondi eseguirà la funzione di aggiornamento
+
+		update()
+
+		changeDirection()
+
+		PosizioneMela()
 
 }
 
@@ -68,7 +78,15 @@ function ClickButton(){
 
 		//update(); //ripetiamo la funzione update più volte perché sennò non si accocchia mentre il serpente si muove
 		setInterval(update, 1000/10); //ogni 100 millisecondi eseguirà la funzione di aggiornamento
+
+		update()
+
+		changeDirection()
+
+		PosizioneMela()
     }
+
+
 
 function updateScore(){
 	score++
@@ -117,12 +135,15 @@ function update() {
 
 	if(SnakeBody.length){
 		SnakeBody[0] = [SnakeX, SnakeY] //impostiamo inizialmente il corpo del serpente che è pari a 0 che riguarda la parte prima della testa e la imposteremo sulle coordinate della testa così avanzeranno insieme
+		context.strokeStyle = "SnakeBorder"
 	}
 
 	context.fillStyle="lime" //setta il riempimento del blocco lime per il colore del serpente//
 	SnakeX += SnakeVX * blocksize //faccio muovere il serpente di un blocco sull'asse x
 	SnakeY += SnakeVY * blocksize //faccio muovere il serpente di un blocco sull'asse y
 	context.fillRect(SnakeX, SnakeY, blocksize, blocksize) //disegnamo la testa del serpente nel canvas settando larghezza e altezza//
+	
+
 
 	//assegnamo il ciclo for per aumentare la lunghezza del serpente quando mangia
 
@@ -130,6 +151,8 @@ function update() {
 
 	for (let i = 0; i < SnakeBody.length; i++){
 		context.fillRect(SnakeBody[i][0], SnakeBody[i][1], blocksize, blocksize); //queste sono le coordinate x e y che prenderanno la dimensione del singolo blocco grazie a blocksize
+
+
 	} //la mela che viene mangiata diventa il corpo del serpente ma non si aggrega ad esso rimane fissa (DA SISTEMARE)
 
 
@@ -137,7 +160,12 @@ function update() {
 	//condizioni del GameOver
 	if (SnakeX < 0 || SnakeX > cols * blocksize || SnakeY < 0 || SnakeY > rows * blocksize) { // condizione utilizzata per quando il serpente supera con l'asse x o y i limiti del nostro canvas
 		GameOver = true
-		alert("Game Over")
+		//alert("Game Over")
+		context.fillStyle = "black"
+		context.textAlign = "center"
+		context.font = "50px Fredoka One" 
+		context.border = "3px solid black" 
+		context.fillText("GAME OVER!", Board.width / 2 , Board.height / 2)
 	}
 
 	for(let i = 0; i < SnakeBody.length; i++) {
@@ -145,7 +173,11 @@ function update() {
 		if (SnakeX == SnakeBody[i][0] && SnakeY == SnakeBody[i][1]) {
 			
 			GameOver = true
-			alert("Game Over")
+			//alert("Game Over")
+			context.fillStyle = "black"
+			context.textAlign = "center"
+			context.font = "50px MV Boli"
+			context.fillText("GAME OVER!", Board.width / 2 , Board.height / 2)
 		}
 	}
 }
