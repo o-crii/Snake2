@@ -24,11 +24,12 @@ let score = 0
 
 var GameOver = false;
 
-const goulpSound = new Audio("goulp.mp3")  //CHIEDERE A MASTRANDREA gulpSound.play()//
+const goulpSound = new Audio("goulp.mp3")  //CHIEDERE A MASTRANDREA gulpSound.play() 130
 
 
 
 window.onload = function() {
+		var button = document.getElementById('Button')
 
         Board = document.getElementById('Board')  //la variabile Board ha un tag canvas//
 
@@ -127,6 +128,7 @@ function update() {
 		SnakeBody.push([MelaX, MelaY]) //dopo aver mangiato la mela il corpo del serpente si allungherà, in base alla direzione in cui sta andando, di un segmento sull'asse x o sull'asse y
 		updateScore()
 		PosizioneMela()
+		gulpSound.play()
 	}
 
 	for (let i = SnakeBody.length-1; i > 0; i--){
