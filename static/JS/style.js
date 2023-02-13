@@ -27,8 +27,38 @@ var GameOver = false;
 const goulpSound = new Audio("goulp.mp3")  //CHIEDERE A MASTRANDREA gulpSound.play() 130
 
 
+function ClickButton(){
+	window.onload()
+        var button = document.getElementById('Button')
 
-window.onload = function() {
+        Board = document.getElementById('Board')  //la variabile Board ha un tag canvas//
+
+		Board.height = rows * blocksize; //impostiamo l'altezza del canvas moltiplicando le righe per la dimensione del singolo blocco//
+
+		Board.width = cols * blocksize; //impostiamo la larghezza del canvas moltiplicando le colonne per la dimensione del singolo blocco//
+
+		context = Board.getContext('2d') //otteniamo il contesto: board prendi contesto 2d (dimensione); tutto questo è usato per disegnare sulla lavagna//
+
+		//funzione di aggiornamento che aggiornerà la lavagna//
+
+		PosizioneMela();
+
+		//facciamo muovere il serpente//
+
+		document.addEventListener("keyup", changeDirection); //changeDirection è il richiamo della funzione//
+
+		//update(); //ripetiamo la funzione update più volte perché sennò non si accocchia mentre il serpente si muove
+		setInterval(update, 1000/10); //ogni 100 millisecondi eseguirà la funzione di aggiornamento
+
+		update()
+
+		changeDirection()
+
+		PosizioneMela()
+    }
+
+
+    window.onload = function() {
 		var button = document.getElementById('Button')
 
         Board = document.getElementById('Board')  //la variabile Board ha un tag canvas//
@@ -57,35 +87,6 @@ window.onload = function() {
 		PosizioneMela()
 
 }
-
-function ClickButton(){
-        var button = document.getElementById('Button')
-
-        Board = document.getElementById('Board')  //la variabile Board ha un tag canvas//
-
-		Board.height = rows * blocksize; //impostiamo l'altezza del canvas moltiplicando le righe per la dimensione del singolo blocco//
-
-		Board.width = cols * blocksize; //impostiamo la larghezza del canvas moltiplicando le colonne per la dimensione del singolo blocco//
-
-		context = Board.getContext('2d') //otteniamo il contesto: board prendi contesto 2d (dimensione); tutto questo è usato per disegnare sulla lavagna//
-
-		//funzione di aggiornamento che aggiornerà la lavagna//
-
-		PosizioneMela();
-
-		//facciamo muovere il serpente//
-
-		document.addEventListener("keyup", changeDirection); //changeDirection è il richiamo della funzione//
-
-		//update(); //ripetiamo la funzione update più volte perché sennò non si accocchia mentre il serpente si muove
-		setInterval(update, 1000/10); //ogni 100 millisecondi eseguirà la funzione di aggiornamento
-
-		update()
-
-		changeDirection()
-
-		PosizioneMela()
-    }
 
 
 
